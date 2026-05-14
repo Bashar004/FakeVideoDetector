@@ -1,7 +1,7 @@
-# ============================================
-# FAKE VIDEO DETECTOR — DESKTOP APP
+
+
 # DFD Model + FFT + Face Detection
-# ============================================
+
 
 import os
 import cv2
@@ -17,25 +17,25 @@ import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
 import threading
 
-# ============================================
-# CONFIGURATION
-# ============================================
 
-# ← CHANGED: new model name
+# CONFIGURATION
+
+
+
 MODEL_PATH           = os.path.join(
     os.path.dirname(__file__), "DFD_model_final.pth"
 )
 IMG_SIZE             = 224
-FRAMES_PER_VIDEO     = 8      # ← CHANGED: 10 not 15
+FRAMES_PER_VIDEO     = 8      
 CONFIDENCE_THRESHOLD = 0.5
 
 device = torch.device(
     "cuda" if torch.cuda.is_available() else "cpu"
 )
 
-# ============================================
+
 # FFT FUNCTION ← NEW
-# ============================================
+
 
 def apply_fft(image):
     """
@@ -59,9 +59,9 @@ def apply_fft(image):
     combined[:, :, 2] = magnitude
     return combined
 
-# ============================================
+
 # LOAD MODEL
-# ============================================
+
 
 def load_model():
     """Load DFD trained EfficientNet-B4 model"""
@@ -98,9 +98,9 @@ def load_model():
         )
         return None, 0, 'Unknown', False
 
-# ============================================
+
 # FACE DETECTION
-# ============================================
+
 
 face_cascade = cv2.CascadeClassifier(
     cv2.data.haarcascades +
@@ -192,9 +192,9 @@ def extract_face_frames(video_path,
     cap.release()
     return face_frames, total_frames, duration
 
-# ============================================
+
 # PREDICTION
-# ============================================
+
 
 # ← CHANGED: Same transform as training
 transform = transforms.Compose([
@@ -260,9 +260,9 @@ def predict_video(video_path, model,
         )
     }
 
-# ============================================
+
 # DESKTOP APP UI
-# ============================================
+
 
 class FakeVideoDetectorApp:
     def __init__(self, root):
@@ -641,9 +641,9 @@ class FakeVideoDetectorApp:
             fill='both', expand=True
         )
 
-# ============================================
+
 # RUN THE APP
-# ============================================
+
 
 if __name__ == "__main__":
     root = tk.Tk()
